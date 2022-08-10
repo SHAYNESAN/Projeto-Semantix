@@ -37,31 +37,20 @@ stored as textfile tblproperties("skip.header.line.count"="1") ;
 
 ![Captura de tela de 2022-08-10 12-22-50](https://user-images.githubusercontent.com/39307787/183943263-3e63e340-0055-4d61-99fb-438285c7cd45.png)
 
+![Captura de tela de 2022-08-10 12-25-10](https://user-images.githubusercontent.com/39307787/183943871-fabcf47b-b32a-42a2-a030-2e2fd77a252c.png)
 
  #Enviar a tabela para o Kafka
  
- casos_obitos.selectExpr("to_json(struct(*)) AS value")\
-.write.format("kafka")\
-.option("kafka.bootstrap.servers", "kafka:9092")\
-.option("topic", "casos_obitos")\
-.save()
-
+![Captura de tela de 2022-08-10 12-26-35](https://user-images.githubusercontent.com/39307787/183944155-abc1e91e-6067-4988-b1ef-151a2dc11286.png)
 
 #Panorama geral do Covid19
 
-panorama_geral = df.select("regiao","estado","casosAcumulado","obitosAcumulado","populacaoTCU2019","data")\
-.filter("data == '2021-07-06 00:00:00'")\
-.withColumn("Regiao",col("regiao"))\
-.withColumn("Estado",col("estado"))\
-.withColumn("Casos",col("casosAcumulado"))\
-.withColumn("Obitos",col("obitosAcumulado"))\
-.withColumn("Incidencia_100mil",f.round((df["casosAcumulado"]/df["populacaoTCU2019"])*100000,1).cast('float'))\
-.withColumn("Mortalidade_100mil",format_number((df["obitosAcumulado"]/df["populacaoTCU2019"])*100000,1).cast('float'))\
-.withColumn("Atualizacao",col("data"))\
-.drop(df.casosAcumulado).drop(df.data)\
-.drop(df.obitosAcumulado)\
-.drop(df.populacaoTCU2019)\
-.orderBy(col("Casos").desc())
+
+![Captura de tela de 2022-08-10 12-27-54](https://user-images.githubusercontent.com/39307787/183944528-6b5cdd40-fb70-45b6-99e1-08e521c9368a.png)
+
+
+
+
 
 
 
