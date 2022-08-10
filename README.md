@@ -10,16 +10,20 @@ beeline -u jdbc:hive2://localhost:10000
 criar database, criar tabela com os parametros
 
 create table covid1(regiao string, estado string, coduf integer, codmun integer,codregiaosaude integer,nomeregiaosaude string, data timestamp,semanaEpi integer,
-
 populacaoTCU2019 integer, casosacumulado decimal(10,0),casosnovos integer, obitosacumulados integer, obitosNnvos integer, recuperadosnovos integer,
 emacompanhamentonovos integer,interior_metropolitana integer) PARTITIONED BY (municipio string)row format delimited fields terminated by ';' lines terminated by '\n'
 stored as textfile tblproperties("skip.header.line.count"="1") ;
+
 2 parte executada no Jupyter Notebook
 
 from pyspark.sql.functions import *
+
 from pyspark.sql.types import *
+
 from pyspark.sql import functions as f
+
 from pyspark.sql import SQLContext
+
 from pyspark.sql import SparkSession
 
 df = spark.read.option("header",True)\
