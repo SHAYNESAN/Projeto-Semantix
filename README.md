@@ -1,4 +1,5 @@
-# Projeto-Semantix
+## Projeto-Semantix
+
 Projeto final do Curso Engenharia de Dados - Big Data - Semantix
 
 Projeto com analise dos dados do Covid19 no Brasil no periodo:03-2019 a 06/07/21.
@@ -13,7 +14,7 @@ docker exec -it hive-server bash.
 
 beeline -u jdbc:hive2://localhost:10000
 
-### Criar database e tabela com os parametros
+#### Criar database e tabela com os parametros
 
 ![Acessando_configurando_beeline](https://user-images.githubusercontent.com/39307787/183940349-a435724d-f9ac-4735-80bb-313fe73d9a2d.png)
 
