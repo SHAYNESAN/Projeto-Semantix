@@ -1,10 +1,16 @@
 # Projeto-Semantix
-Projeto final do Curso Engenharia de Dados - Big Data.
+Projeto final do Curso Engenharia de Dados - Big Data
+
 Subir o docker-compose up -d.
+
 docker exec -it hive-server bash.
+
 beeline -u jdbc:hive2://localhost:10000
+
 criar database, criar tabela com os parametros
+
 create table covid1(regiao string, estado string, coduf integer, codmun integer,codregiaosaude integer,nomeregiaosaude string, data timestamp,semanaEpi integer,
+
 populacaoTCU2019 integer, casosacumulado decimal(10,0),casosnovos integer, obitosacumulados integer, obitosNnvos integer, recuperadosnovos integer,
 emacompanhamentonovos integer,interior_metropolitana integer) PARTITIONED BY (municipio string)row format delimited fields terminated by ';' lines terminated by '\n'
 stored as textfile tblproperties("skip.header.line.count"="1") ;
