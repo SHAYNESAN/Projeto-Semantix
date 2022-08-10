@@ -17,6 +17,8 @@ populacaoTCU2019 integer, casosacumulado decimal(10,0),casosnovos integer, obito
 emacompanhamentonovos integer,interior_metropolitana integer) PARTITIONED BY (municipio string)row format delimited fields terminated by ';' lines terminated by '\n'
 stored as textfile tblproperties("skip.header.line.count"="1") ;
 
+![Criando_tabela_hive_Particionada](https://user-images.githubusercontent.com/39307787/183940685-a120b69b-d380-4f8a-8962-e3ff91dce40c.png)
+
 2 parte executada no Jupyter Notebook
 
 from pyspark.sql.functions import *
@@ -35,6 +37,10 @@ df = spark.read.option("header",True)\
     .option("delimiter", ";")\
     .csv("/user/sandro/projeto/HIST_PAINEL_COVIDBR_2021_Parte2_06jul2021.csv")
     
+ ![Captura de tela de 2022-08-09 21-38-14](https://user-images.githubusercontent.com/39307787/183941122-df400206-2878-47e0-8352-af4334ae8596.png)
+
+    
+       
 #Salvando o Df como tabela hive particionada por munincipo
 
 df.write.mode("overwrite").partitionBy("municipio").saveAsTable("covid19")
