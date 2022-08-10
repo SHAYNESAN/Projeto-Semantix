@@ -35,16 +35,14 @@ df = spark.read.option("header",True)\
 #Salvando o Df como tabela hive particionada por munincipo
 
 df.write.mode("overwrite").partitionBy("municipio").saveAsTable("covid19")
+
 casos_recuperados = df.select("regiao","Recuperadosnovos","emAcompanhamentoNovos").filter("regiao is Not Null")\
 .filter("Recuperadosnovos is Not Null").filter("emAcompanhamentoNovos is Not Null").filter("data == '2021-07-06 00:00:00'")\
 .groupBy("regiao").agg(max("Recuperadosnovos").alias("Casos_recuperados"),\
                        max("emAcompanhamentoNovos").alias("Em_acompanhamento"))
-           egiao|Casos_recuperados|Em_acompanhamento|
-           
-
+           egiao|Casos_recuperados|Em_acompanhamento|        
 
 casos_confirmados.write.mode("overwrite").saveAsTable("Casos_confirmados")
-
 
 casos_obitos = df.select("regiao","obitosAcumulado","obitosNovos","populacaoTCU2019","casosAcumulado")\
 .filter("regiao == 'Brasil'").filter("data == '2021-07-06 00:00:00'")\
@@ -57,10 +55,6 @@ casos_obitos = df.select("regiao","obitosAcumulado","obitosNovos","populacaoTCU2
                        .alias("mortalidade")).orderBy(col("Obitos confirmados").desc())
 casos_obitos.show(10)
 casos_obitos.printSchema()
-
-
-
-
  
  #Enviar a tabela para o Kafka
  
