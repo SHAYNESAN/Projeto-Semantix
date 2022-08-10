@@ -30,27 +30,14 @@ stored as textfile tblproperties("skip.header.line.count"="1") ;
 
 ![Captura de tela de 2022-08-10 12-17-07](https://user-images.githubusercontent.com/39307787/183942020-dd75f27b-2a18-4f55-a8f2-6e64881437f3.png)
 
+3. Criar as 3 vizualizações pelo Spark com os dados enviados para o HDFS:
 
-casos_recuperados = df.select("regiao","Recuperadosnovos","emAcompanhamentoNovos").filter("regiao is Not Null")\
-.filter("Recuperadosnovos is Not Null").filter("emAcompanhamentoNovos is Not Null").filter("data == '2021-07-06 00:00:00'")\
-.groupBy("regiao").agg(max("Recuperadosnovos").alias("Casos_recuperados"),\
-                       max("emAcompanhamentoNovos").alias("Em_acompanhamento"))
-           egiao|Casos_recuperados|Em_acompanhamento|        
 
-casos_confirmados.write.mode("overwrite").saveAsTable("Casos_confirmados")
+![Captura de tela de 2022-08-10 12-21-03](https://user-images.githubusercontent.com/39307787/183942898-451d46fe-eab7-419d-8f59-61b385640bae.png)
 
-casos_obitos = df.select("regiao","obitosAcumulado","obitosNovos","populacaoTCU2019","casosAcumulado")\
-.filter("regiao == 'Brasil'").filter("data == '2021-07-06 00:00:00'")\
-.filter("obitosAcumulado is Not Null").filter("obitosNovos is Not Null").filter("populacaoTCU2019 is Not Null")\
-.groupBy("regiao").agg(max("obitosAcumulado").alias("Obitos confirmados"),\
-                       max("obitosNovos").alias("Casos novos"),\
-                       format_number(max((df["obitosAcumulado"]/df["casosAcumulado"])*100),1).cast('float')\
-                       .alias("letalidade"),\
-                       format_number(max((df["obitosAcumulado"]/df["populacaoTCU2019"])*100000),1).cast('float')\
-                       .alias("mortalidade")).orderBy(col("Obitos confirmados").desc())
-casos_obitos.show(10)
-casos_obitos.printSchema()
- 
+![Captura de tela de 2022-08-10 12-22-50](https://user-images.githubusercontent.com/39307787/183943263-3e63e340-0055-4d61-99fb-438285c7cd45.png)
+
+
  #Enviar a tabela para o Kafka
  
  casos_obitos.selectExpr("to_json(struct(*)) AS value")\
