@@ -28,7 +28,8 @@ stored as textfile tblproperties("skip.header.line.count"="1") ;
        
 #Salvando o Df como tabela hive particionada por munincipo
 
-df.write.mode("overwrite").partitionBy("municipio").saveAsTable("covid19")
+![Captura de tela de 2022-08-10 12-17-07](https://user-images.githubusercontent.com/39307787/183942020-dd75f27b-2a18-4f55-a8f2-6e64881437f3.png)
+
 
 casos_recuperados = df.select("regiao","Recuperadosnovos","emAcompanhamentoNovos").filter("regiao is Not Null")\
 .filter("Recuperadosnovos is Not Null").filter("emAcompanhamentoNovos is Not Null").filter("data == '2021-07-06 00:00:00'")\
