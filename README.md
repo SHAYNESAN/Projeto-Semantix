@@ -39,4 +39,89 @@ casos_recuperados = df.select("regiao","Recuperadosnovos","emAcompanhamentoNovos
 .filter("Recuperadosnovos is Not Null").filter("emAcompanhamentoNovos is Not Null").filter("data == '2021-07-06 00:00:00'")\
 .groupBy("regiao").agg(max("Recuperadosnovos").alias("Casos_recuperados"),\
                        max("emAcompanhamentoNovos").alias("Em_acompanhamento"))
+           egiao|Casos_recuperados|Em_acompanhamento|
+           
++------+-----------------+-----------------+
+|Brasil|         17262646|          1065477|
++------+-----------------+-----------------+            
+
+
+casos_confirmados.write.mode("overwrite").saveAsTable("Casos_confirmados")
+
+
+Found 2 items
+-rw-r--r--   2 root supergroup          0 2022-08-09 21:08 /user/hive/warehouse/casos_confirmados/_SUCCESS
+-rw-r--r--   2 root supergroup       1150 2022-08-09 21:08 /user/hive/warehouse/casos_confirmados/part-00000-121a5b72-fb4d-409f-9bf3-3abf2b5ba7f9-c000.snappy.parquet
+
+
+
+
+casos_obitos = df.select("regiao","obitosAcumulado","obitosNovos","populacaoTCU2019","casosAcumulado")\
+.filter("regiao == 'Brasil'").filter("data == '2021-07-06 00:00:00'")\
+.filter("obitosAcumulado is Not Null").filter("obitosNovos is Not Null").filter("populacaoTCU2019 is Not Null")\
+.groupBy("regiao").agg(max("obitosAcumulado").alias("Obitos confirmados"),\
+                       max("obitosNovos").alias("Casos novos"),\
+                       format_number(max((df["obitosAcumulado"]/df["casosAcumulado"])*100),1).cast('float')\
+                       .alias("letalidade"),\
+                       format_number(max((df["obitosAcumulado"]/df["populacaoTCU2019"])*100000),1).cast('float')\
+                       .alias("mortalidade")).orderBy(col("Obitos confirmados").desc())
+casos_obitos.show(10)
+casos_obitos.printSchema()
+
+
+
++------+------------------+-----------+----------+-----------+
+|regiao|Obitos confirmados|Casos novos|letalidade|mortalidade|
++------+------------------+-----------+----------+-----------+
+|Brasil|            526892|       1780|       2.8|      250.7|
++------+------------------+-----------+----------+-----------+
+
+root
+ |-- regiao: string (nullable = true)
+ |-- Obitos confirmados: integer (nullable = true)
+ |-- Casos novos: integer (nullable = true)
+ |-- letalidade: float (nullable = true)
+ |-- mortalidade: float (nullable = true)
+ 
+ 
+ #Enviar a tabela para o Kafka
+ 
+ casos_obitos.selectExpr("to_json(struct(*)) AS value")\
+.write.format("kafka")\
+.option("kafka.bootstrap.servers", "kafka:9092")\
+.option("topic", "casos_obitos")\
+.save()
+
+
+#Panorama geral do Covid19
+
+panorama_geral = df.select("regiao","estado","casosAcumulado","obitosAcumulado","populacaoTCU2019","data")\
+.filter("data == '2021-07-06 00:00:00'")\
+.withColumn("Regiao",col("regiao"))\
+.withColumn("Estado",col("estado"))\
+.withColumn("Casos",col("casosAcumulado"))\
+.withColumn("Obitos",col("obitosAcumulado"))\
+.withColumn("Incidencia_100mil",f.round((df["casosAcumulado"]/df["populacaoTCU2019"])*100000,1).cast('float'))\
+.withColumn("Mortalidade_100mil",format_number((df["obitosAcumulado"]/df["populacaoTCU2019"])*100000,1).cast('float'))\
+.withColumn("Atualizacao",col("data"))\
+.drop(df.casosAcumulado).drop(df.data)\
+.drop(df.obitosAcumulado)\
+.drop(df.populacaoTCU2019)\
+.orderBy(col("Casos").desc())
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
