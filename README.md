@@ -2,11 +2,8 @@
 Projeto final do Curso Engenharia de Dados - Big Data
 
 Subir o docker-compose up -d.
-
 docker exec -it hive-server bash.
-
 beeline -u jdbc:hive2://localhost:10000
-
 criar database, criar tabela com os parametros
 ![Acessando_configurando_beeline](https://user-images.githubusercontent.com/39307787/183940349-a435724d-f9ac-4735-80bb-313fe73d9a2d.png)
 
