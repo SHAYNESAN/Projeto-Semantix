@@ -45,8 +45,10 @@ stored as textfile tblproperties("skip.header.line.count"="1") ;
 
 #Panorama geral do Covid19
 
+![Captura de tela de 2022-08-10 12-30-35](https://user-images.githubusercontent.com/39307787/183945722-8ba48c0e-9d58-43cb-a1bc-6e17edb821af.png)
 
-![Captura de tela de 2022-08-10 12-27-54](https://user-images.githubusercontent.com/39307787/183944528-6b5cdd40-fb70-45b6-99e1-08e521c9368a.png)
+![Captura de tela de 2022-08-10 12-32-20](https://user-images.githubusercontent.com/39307787/183945511-bf786db2-59c0-4adb-8b1b-4b09763a13d7.png)
+
 
 
 
