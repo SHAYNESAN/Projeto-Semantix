@@ -41,19 +41,9 @@ casos_recuperados = df.select("regiao","Recuperadosnovos","emAcompanhamentoNovos
                        max("emAcompanhamentoNovos").alias("Em_acompanhamento"))
            egiao|Casos_recuperados|Em_acompanhamento|
            
-+------+-----------------+-----------------+
-|Brasil|         17262646|          1065477|
-+------+-----------------+-----------------+            
 
 
 casos_confirmados.write.mode("overwrite").saveAsTable("Casos_confirmados")
-
-
-Found 2 items
--rw-r--r--   2 root supergroup          0 2022-08-09 21:08 /user/hive/warehouse/casos_confirmados/_SUCCESS
--rw-r--r--   2 root supergroup       1150 2022-08-09 21:08 /user/hive/warehouse/casos_confirmados/part-00000-121a5b72-fb4d-409f-9bf3-3abf2b5ba7f9-c000.snappy.parquet
-
-
 
 
 casos_obitos = df.select("regiao","obitosAcumulado","obitosNovos","populacaoTCU2019","casosAcumulado")\
@@ -70,19 +60,7 @@ casos_obitos.printSchema()
 
 
 
-+------+------------------+-----------+----------+-----------+
-|regiao|Obitos confirmados|Casos novos|letalidade|mortalidade|
-+------+------------------+-----------+----------+-----------+
-|Brasil|            526892|       1780|       2.8|      250.7|
-+------+------------------+-----------+----------+-----------+
 
-root
- |-- regiao: string (nullable = true)
- |-- Obitos confirmados: integer (nullable = true)
- |-- Casos novos: integer (nullable = true)
- |-- letalidade: float (nullable = true)
- |-- mortalidade: float (nullable = true)
- 
  
  #Enviar a tabela para o Kafka
  
