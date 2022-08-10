@@ -17,12 +17,7 @@ criar database, criar tabela com os parametros
 
 ![Acessando_configurando_beeline](https://user-images.githubusercontent.com/39307787/183940349-a435724d-f9ac-4735-80bb-313fe73d9a2d.png)
 
-
-
-create table covid1(regiao string, estado string, coduf integer, codmun integer,codregiaosaude integer,nomeregiaosaude string, data timestamp,semanaEpi integer,
-populacaoTCU2019 integer, casosacumulado decimal(10,0),casosnovos integer, obitosacumulados integer, obitosNnvos integer, recuperadosnovos integer,
-emacompanhamentonovos integer,interior_metropolitana integer) PARTITIONED BY (municipio string)row format delimited fields terminated by ';' lines terminated by '\n'
-stored as textfile tblproperties("skip.header.line.count"="1") ;
+# Criação da tabela 
 
 ![Criando_tabela_hive_Particionada](https://user-images.githubusercontent.com/39307787/183940685-a120b69b-d380-4f8a-8962-e3ff91dce40c.png)
 
