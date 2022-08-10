@@ -1,7 +1,7 @@
 # Projeto-Semantix
-Projeto final do Curso Engenharia de Dados - Big Data
-Subir o docker-compose up -d
-docker exec -it hive-server bash
+Projeto final do Curso Engenharia de Dados - Big Data.
+Subir o docker-compose up -d.
+docker exec -it hive-server bash.
 beeline -u jdbc:hive2://localhost:10000
 criar database, criar tabela com os parametros
 create table covid1(regiao string, estado string, coduf integer, codmun integer,codregiaosaude integer,nomeregiaosaude string, data timestamp,semanaEpi integer,
