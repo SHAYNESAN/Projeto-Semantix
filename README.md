@@ -49,6 +49,13 @@ stored as textfile tblproperties("skip.header.line.count"="1") ;
 
 ![Captura de tela de 2022-08-10 12-32-20](https://user-images.githubusercontent.com/39307787/183945511-bf786db2-59c0-4adb-8b1b-4b09763a13d7.png)
 
+#Visualizacoes dos dados no Elasticsearch - kibana
+
+![Discover_kibana](https://user-images.githubusercontent.com/39307787/183946320-d9358ebb-1f81-4332-b88a-c5e419fb35b3.png)
+
+![Dashboard_kibana](https://user-images.githubusercontent.com/39307787/183946435-396b863f-3a13-45a8-96e6-fe2ca72ab128.png)
+
+
 
 
 
