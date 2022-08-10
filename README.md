@@ -21,21 +21,6 @@ stored as textfile tblproperties("skip.header.line.count"="1") ;
 
 2 parte executada no Jupyter Notebook
 
-from pyspark.sql.functions import *
-
-from pyspark.sql.types import *
-
-from pyspark.sql import functions as f
-
-from pyspark.sql import SQLContext
-
-from pyspark.sql import SparkSession
-
-df = spark.read.option("header",True)\
-    .option("inferSchema",True)\
-    .option("mode","DROPMALFORMED")\
-    .option("delimiter", ";")\
-    .csv("/user/sandro/projeto/HIST_PAINEL_COVIDBR_2021_Parte2_06jul2021.csv")
     
  ![Captura de tela de 2022-08-09 21-38-14](https://user-images.githubusercontent.com/39307787/183941122-df400206-2878-47e0-8352-af4334ae8596.png)
 
