@@ -2,7 +2,7 @@
 
 Projeto final do Curso Engenharia de Dados - Big Data - Semantix
 
-Projeto com analise dos dados do Covid19 no Brasil no periodo:03-2019 a 06/07/21.
+Projeto com analise dos dados do Covid19 no Brasil no periodo:03-2020 a 06/07/21.
 
 Dados utilizados:     
 https://mobileapps.saude.gov.br/esus-vepi/files/unAFkcaNDeXajurGB7LChj8SgQYS2ptm/04bd3419b22b9cc5c6efac2c6528100d_HIST_PAINEL_COVIDBR_06jul2021.rar
